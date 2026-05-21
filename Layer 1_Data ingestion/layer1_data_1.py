@@ -37,7 +37,8 @@ import pandas as pd
 # CONFIG
 # ─────────────────────────────────────────────────────────────────
 
-DATA_DIR      = r"C:\Gold ETF arbitrage\Layer 1_Data ingestion\stock_data_files"
+SCRIPT_DIR    = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR      = os.path.join(SCRIPT_DIR, "stock_data_files")
 GOLD_TICKER   = "GC=F"
 USDCNY_TICKER = "USDCNY=X"
 
@@ -358,7 +359,7 @@ if __name__ == "__main__":
     print(prices.tail(3).to_string())
 
     # Save outputs so Layer 2 can load instantly without re-reading CSVs
-    out_dir = r"C:\Gold ETF arbitrage\Layer 1_Data ingestion"
+    out_dir = SCRIPT_DIR
     prices.to_parquet(os.path.join(out_dir, "layer1_prices.parquet"))
     reserves.to_csv(os.path.join(out_dir, "layer1_reserves.csv"))
     print(f"\nSaved: layer1_prices.parquet + layer1_reserves.csv → {out_dir}")

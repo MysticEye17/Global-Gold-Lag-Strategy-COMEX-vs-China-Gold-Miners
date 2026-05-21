@@ -37,9 +37,11 @@ Downstream layers import:
 
 import os
 import sys
-sys.path.insert(0, r"C:\Gold ETF arbitrage\Layer 1_Data ingestion")
-sys.path.insert(0, r"C:\Gold ETF arbitrage\Layer 2_Index construction")
-sys.path.insert(0, r"C:\Gold ETF arbitrage\Layer 3_Signal generation")
+import sys
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.abspath(os.path.join(SCRIPT_DIR, "..", "Layer 1_Data ingestion")))
+sys.path.insert(0, os.path.abspath(os.path.join(SCRIPT_DIR, "..", "Layer 2_Index construction")))
+sys.path.insert(0, os.path.abspath(os.path.join(SCRIPT_DIR, "..", "Layer 3_Signal")))
 
 import numpy as np
 import pandas as pd
@@ -51,8 +53,8 @@ from matplotlib.gridspec import GridSpec
 # CONFIG
 # ─────────────────────────────────────────────────────────────────
 
-L3_DIR  = r"C:\Gold ETF arbitrage\Layer 3_Signal generation"
-OUT_DIR = r"C:\Gold ETF arbitrage\Layer 4_Backtest engine"
+L3_DIR  = os.path.abspath(os.path.join(SCRIPT_DIR, "..", "Layer 3_Signal"))
+OUT_DIR = os.path.abspath(SCRIPT_DIR)
 
 TRANSACTION_COST    = 0.002   # 0.20% per leg (one-way)
 

@@ -35,10 +35,14 @@ Run:  python layer5_analysis.py
 
 import os
 import sys
-sys.path.insert(0, r"C:\Gold ETF arbitrage\Layer 1_Data ingestion")
-sys.path.insert(0, r"C:\Gold ETF arbitrage\Layer 2_Index construction")
-sys.path.insert(0, r"C:\Gold ETF arbitrage\Layer 3_Signal generation")
-sys.path.insert(0, r"C:\Gold ETF arbitrage\Layer 4_Backtest engine")
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+L3_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, "..", "Layer 3_Signal"))
+L4_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, "..", "Layer 4_Backtest engine"))
+OUT_DIR = os.path.abspath(SCRIPT_DIR)
+sys.path.insert(0, os.path.abspath(os.path.join(SCRIPT_DIR, "..", "Layer 1_Data ingestion")))
+sys.path.insert(0, os.path.abspath(os.path.join(SCRIPT_DIR, "..", "Layer 2_Index construction")))
+sys.path.insert(0, L3_DIR)
+sys.path.insert(0, L4_DIR)
 
 import numpy as np
 import pandas as pd
@@ -50,10 +54,6 @@ from itertools import product
 # ─────────────────────────────────────────────────────────────────
 # CONFIG
 # ─────────────────────────────────────────────────────────────────
-
-L3_DIR  = r"C:\Gold ETF arbitrage\Layer 3_Signal generation"
-L4_DIR  = r"C:\Gold ETF arbitrage\Layer 4_Backtest engine"
-OUT_DIR = r"C:\Gold ETF arbitrage\Layer 5_Analysis"
 
 TRANSACTION_COST = 0.002    # keep constant across all sweep runs
 STOP_LOSS_PCT    = 0.05

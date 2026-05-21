@@ -42,7 +42,10 @@ Run:  python permutation_test.py
 
 import os
 import sys
-sys.path.insert(0, r"C:\Gold ETF arbitrage\Layer 3_Signal generation")
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+L3_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, "..", "Layer 3_Signal"))
+OUT_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, "..", "Layer 7_final backtest"))
+sys.path.insert(0, L3_DIR)
 
 import numpy as np
 import pandas as pd
@@ -55,9 +58,6 @@ warnings.filterwarnings("ignore")
 # ─────────────────────────────────────────────────────────────────
 # CONFIG
 # ─────────────────────────────────────────────────────────────────
-
-L3_DIR       = r"C:\Gold ETF arbitrage\Layer 3_Signal generation"
-OUT_DIR      = r"C:\Gold ETF arbitrage\Final Backtest"
 
 N_PERMUTATIONS  = 1000        # number of shuffled runs
 RANDOM_SEED     = 42

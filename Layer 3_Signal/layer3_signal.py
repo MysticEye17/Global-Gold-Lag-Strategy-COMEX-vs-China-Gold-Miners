@@ -32,8 +32,11 @@ Downstream layers import:
 
 import os
 import sys
-sys.path.insert(0, r"C:\Gold ETF arbitrage\Layer 1_Data ingestion")
-sys.path.insert(0, r"C:\Gold ETF arbitrage\Layer 2_Index construction")
+import sys
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+# Add sibling layer dirs to sys.path when needed (relocatable)
+sys.path.insert(0, os.path.abspath(os.path.join(SCRIPT_DIR, "..", "Layer 1_Data ingestion")))
+sys.path.insert(0, os.path.abspath(os.path.join(SCRIPT_DIR, "..", "Layer 2_Index construction")))
 
 import numpy as np
 import pandas as pd
@@ -45,8 +48,8 @@ from matplotlib.gridspec import GridSpec
 # CONFIG
 # ─────────────────────────────────────────────────────────────────
 
-L2_DIR  = r"C:\Gold ETF arbitrage\Layer 2_Index construction"
-OUT_DIR = r"C:\Gold ETF arbitrage\Layer 3_Signal generation"
+L2_DIR  = os.path.abspath(os.path.join(SCRIPT_DIR, "..", "Layer 2_Index construction"))
+OUT_DIR = os.path.abspath(SCRIPT_DIR)
 
 # Cross-correlation
 MAX_LAG    = 10          # test lags from -10 to +10 days

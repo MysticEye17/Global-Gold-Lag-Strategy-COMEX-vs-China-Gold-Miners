@@ -48,11 +48,14 @@ Run:  python layer6_validation.py
 
 import os
 import sys
-sys.path.insert(0, r"C:\Gold ETF arbitrage\Layer 1_Data ingestion")
-sys.path.insert(0, r"C:\Gold ETF arbitrage\Layer 2_Index construction")
-sys.path.insert(0, r"C:\Gold ETF arbitrage\Layer 3_Signal generation")
-sys.path.insert(0, r"C:\Gold ETF arbitrage\Layer 4_Backtest engine")
-sys.path.insert(0, r"C:\Gold ETF arbitrage\Layer 5_analysis")
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+L3_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, "..", "Layer 3_Signal"))
+OUT_DIR = os.path.abspath(SCRIPT_DIR)
+sys.path.insert(0, os.path.abspath(os.path.join(SCRIPT_DIR, "..", "Layer 1_Data ingestion")))
+sys.path.insert(0, os.path.abspath(os.path.join(SCRIPT_DIR, "..", "Layer 2_Index construction")))
+sys.path.insert(0, L3_DIR)
+sys.path.insert(0, os.path.abspath(os.path.join(SCRIPT_DIR, "..", "Layer 4_Backtest engine")))
+sys.path.insert(0, os.path.abspath(os.path.join(SCRIPT_DIR, "..", "Layer 5_analysis")))
 
 import numpy as np
 import pandas as pd
@@ -64,9 +67,6 @@ from itertools import product
 # ─────────────────────────────────────────────────────────────────
 # CONFIG
 # ─────────────────────────────────────────────────────────────────
-
-L3_DIR  = r"C:\Gold ETF arbitrage\Layer 3_Signal generation"
-OUT_DIR = r"C:\Gold ETF arbitrage\Layer 6_Validation"
 
 # Train / test split
 TRAIN_END   = "2019-12-31"

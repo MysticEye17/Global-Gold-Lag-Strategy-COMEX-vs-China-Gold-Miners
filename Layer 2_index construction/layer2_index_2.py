@@ -29,7 +29,12 @@ Downstream layers import:
 
 import os
 import sys
-sys.path.insert(0, r"C:\Gold ETF arbitrage\Layer 1_Data ingestion")
+
+# Use script-relative directories so the project is relocatable
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+L1_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, "..", "Layer 1_Data ingestion"))
+OUT_DIR = os.path.abspath(SCRIPT_DIR)
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -38,9 +43,6 @@ import matplotlib.dates as mdates
 # ─────────────────────────────────────────────────────────────────
 # CONFIG
 # ─────────────────────────────────────────────────────────────────
-
-L1_DIR  = r"C:\Gold ETF arbitrage\Layer 1_Data ingestion"
-OUT_DIR = r"C:\Gold ETF arbitrage\Layer 2_Index construction"
 
 # 7-stock universe (601069.SS dropped — insufficient history)
 UNIVERSE = {
@@ -74,8 +76,8 @@ def load_layer1(l1_dir: str = L1_DIR) -> pd.DataFrame:
     else:
         print("  layer1_prices.parquet not found — running Layer 1 now ...")
         import sys
-        sys.path.insert(0, r"C:\Gold ETF arbitrage\Layer 1_Data ingestion\stock_data_files")
-        sys.path.insert(0, r"C:\Gold ETF arbitrage\Layer 1_Data ingestion")
+        sys.path.insert(0, os.path.join(L1_DIR, "stock_data_files"))
+        sys.path.insert(0, L1_DIR)
         from layer1_data import load_all
         prices, _ = load_all(verbose=False)
 
